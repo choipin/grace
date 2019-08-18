@@ -23,7 +23,7 @@ public interface DeptManagerDao {
 
     public Integer updateByCondition(DeptManagerDao deptManager);
 
-    public Long insert(DeptManager deptManager);
+    public Integer insert(DeptManager deptManager);
 
     public Integer deleteByEmpNo(Long empNo);
 }

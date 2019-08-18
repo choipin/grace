@@ -18,14 +18,12 @@ import java.util.List;
  * @version: 1.0
  */
 @RestController
-@LoggerParam
-@RequestMapping("/title")
 public class TitleController {
 
     @Autowired
     private TitleService titleService;
 
-    @GetMapping("/list")
+    @GetMapping("/title")
     public List<Title> selectTitleByCondition(Title title){
         return titleService.listByCondition(title);
     }
@@ -45,7 +43,7 @@ public class TitleController {
         return titleService.add(title);
     }
 
-    @DeleteMapping("/delete/{empNo}")
+    @DeleteMapping("/delete")
     public Integer deleteByEmpNo(@PathVariable("empNo")Long empNo){
         return titleService.deleteByEmpNo(empNo);
     }

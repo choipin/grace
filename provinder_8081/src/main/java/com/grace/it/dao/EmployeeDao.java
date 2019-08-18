@@ -24,7 +24,7 @@ public interface EmployeeDao {
 
     public Integer updateByCondition(Employee employee);
 
-    public Long insert(Employee employee);
+    public Integer insert(Employee employee);
 
     public Integer deleteByEmpNo(Long empNo);
 }
