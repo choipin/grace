@@ -43,11 +43,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     @Override
     public Integer insert(Department department) {
-        return departmentDao.deteleByCondition(department);
+        return departmentDao.insert(department);
     }
 
     @Override
-    public Integer delete(Department department) {
-        return departmentDao.deteleByCondition(department);
+    public Integer delete(String deptNo) {
+        return departmentDao.deteleByCondition(deptNo);
     }
 }

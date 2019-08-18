@@ -23,7 +23,7 @@ public interface DeptEmpDao {
 
     public Integer updateByCondition(DeptEmp deptEmp);
 
-    public Long insert(DeptEmp deptEmp);
+    public Integer insert(DeptEmp deptEmp);
 
     public Integer countRows();
 

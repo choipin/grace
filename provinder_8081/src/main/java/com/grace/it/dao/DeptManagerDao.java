@@ -25,7 +25,7 @@ public interface DeptManagerDao {
 
     public Integer updateByCondition(DeptManager deptManager);
 
-    public Long insert(DeptManager deptManager);
+    public Integer insert(DeptManager deptManager);
 
     public Integer deleteByEmpNo(Long empNo);
 }

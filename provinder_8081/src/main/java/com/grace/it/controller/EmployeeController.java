@@ -36,9 +36,14 @@ public class EmployeeController {
         return employeeService.selectByPage(pageVo);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/update")
     public Integer updateByCondition(@RequestBody Employee employee){
         return employeeService.updateByCondition(employee);
+    }
+
+    @PostMapping("/add")
+    public Integer addEmployee(@RequestBody Employee employee){
+        return employeeService.insert(employee);
     }
 
     @DeleteMapping("/delete")

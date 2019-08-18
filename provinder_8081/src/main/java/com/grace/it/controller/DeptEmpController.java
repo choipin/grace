@@ -35,9 +35,12 @@ public class DeptEmpController {
         return deptEmpService.selectTitleByPage(pageVo);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/update")
     public Integer updateByCondition(@RequestBody DeptEmp deptEmp){
-        final Integer insert = deptEmpService.insert(deptEmp);
+        return deptEmpService.updateByCondition(deptEmp);
+    }
+    @PostMapping("/add")
+    public Integer addDeptEmp(@RequestBody DeptEmp deptEmp){
         return deptEmpService.insert(deptEmp);
     }
 

@@ -23,5 +23,5 @@ public interface DeptDao {
 
     public Integer updateByCondition(Dept dept);
 
-    public Long insert(Dept dept);
+    public Integer insert(Dept dept);
 }

@@ -22,5 +22,5 @@ public interface DepartmentService {
 
     public Integer insert(Department department);
 
-    public Integer delete(Department department);
+    public Integer delete(String deptNo);
 }

@@ -54,7 +54,7 @@
         INSERT INTO `department` VALUES (#{deptNo}, #{deptName});
     </insert>
 
-    <delete id="deteleByCondition" parameterType="com.grace.it.entity.Department">
+    <delete id="deteleByCondition" parameterType="string">
         DELETE
         FROM
             department
