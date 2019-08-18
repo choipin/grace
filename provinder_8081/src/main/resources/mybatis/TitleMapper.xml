@@ -21,13 +21,13 @@
                 emp_no = #{empNo}
             </if>
             <if test="title !=null and title !=''">
-                title = #{title}
+                and title = #{title}
             </if>
             <if test="fromDate !=null and fromDate !=''">
-                from_date = #{fromDate}
+                and from_date = #{fromDate}
             </if>
             <if test="toDate !=null and toDate !=''">
-                to_date = #{toDate}
+                and to_date = #{toDate}
             </if>
         </where>
         WHERE
@@ -60,7 +60,34 @@
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.Title">
-        INSERT INTO title VALUES (#{empNo}, #{title}, #{fromDate}, #{toDate});
+        INSERT INTO title(
+            <if test="empNo !=null">
+                emp_no
+            </if>
+            <if test="title !=null and title !=''">
+                ,title
+            </if>
+            <if test="fromDate !=null and fromDate !=''">
+                ,from_date
+            </if>
+            <if test="toDate !=null and toDate !=''">
+                ,to_date
+            </if>
+        )
+        VALUES (
+            <if test="empNo !=null">
+             #{empNo}
+            </if>
+            <if test="title !=null and title !=''">
+                , #{title}
+            </if>
+            <if test="fromDate !=null and fromDate !=''">
+                ,#{fromDate}
+            </if>
+            <if test="toDate !=null and toDate !=''">
+                ,#{toDate}
+            </if>
+        );
     </insert>
 
     <delete id="deleteByEmpNo" parameterType="long">
