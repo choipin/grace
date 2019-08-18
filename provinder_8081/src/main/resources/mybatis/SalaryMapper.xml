@@ -4,8 +4,8 @@
     <resultMap id="collectResultMap" type="com.grace.it.entity.Salary">
         <result column="emp_no" jdbcType="BIGINT" property="empNo"/>
         <result column="salary" jdbcType="VARCHAR" property="salary"/>
-        <result column="from_date" jdbcType="TIMESTAMP" property="fromDate"/>
-        <result column="to_date" jdbcType="TIMESTAMP" property="toDate"/>
+        <result column="from_date" jdbcType="VARCHAR" property="fromDate"/>
+        <result column="to_date" jdbcType="VARCHAR" property="toDate"/>
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">
@@ -43,24 +43,18 @@
     <update id="updateByCondition" parameterType="com.grace.it.entity.Salary">
         update salary
         <set>
-            emp_no = #{empNo},
-            salary = #{salary},
-            from_date = #{fromDate},
-            to_date = #{toDate}
+            <if test="salary !=null">
+                salary = #{salary},
+            </if>
+            <if test="fromDate !=null and fromDate !=''">
+                from_date = #{fromDate},
+            </if>
+            <if test="toDate !=null and toDate !=''">
+                to_date = #{toDate}
+            </if>
         </set>
          <where>
-             <if test="empNo !=null">
-                 emp_no = #{empNo}
-             </if>
-             <if test="salary !=null">
-                 and salary = #{salary}
-             </if>
-             <if test="fromDate !=null">
-                 and from_date = #{fromDate}
-             </if>
-             <if test="toDate !=null">
-                 and to_date = #{toDate}
-             </if>
+             emp_no = #{empNo}
          </where>
     </update>
 

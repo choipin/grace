@@ -4,8 +4,8 @@
     <resultMap id="collectResultMap" type="com.grace.it.entity.Dept">
         <result column="dept_no" jdbcType="BIGINT" property="deptno"/>
         <result column="dName" jdbcType="VARCHAR" property="dName"/>
-        <result column="dbSource" jdbcType="TIMESTAMP" property="dbSource"/>
-        <result column="description" jdbcType="TIMESTAMP" property="description"/>
+        <result column="dbSource" jdbcType="VARCHAR" property="dbSource"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">

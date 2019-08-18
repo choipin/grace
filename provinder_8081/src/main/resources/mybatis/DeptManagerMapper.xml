@@ -4,8 +4,8 @@
     <resultMap id="collectResultMap" type="com.grace.it.entity.DeptManager">
         <result column="emp_no" jdbcType="BIGINT" property="empNo"/>
         <result column="dept_no" jdbcType="VARCHAR" property="deptNo"/>
-        <result column="from_date" jdbcType="TIMESTAMP" property="formDate"/>
-        <result column="to_date" jdbcType="TIMESTAMP" property="toDate"/>
+        <result column="from_date" jdbcType="VARCHAR" property="fromDate"/>
+        <result column="to_date" jdbcType="VARCHAR" property="toDate"/>
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">
@@ -23,10 +23,10 @@
             <if test="deptNo !=null and deptNo !=''">
                 and dept_no = #{deptNo}
             </if>
-            <if test="fromDate !=null">
+            <if test="fromDate !=null and fromDate !=''">
                 and from_date = #{fromDate}
             </if>
-            <if test="toDate !=null">
+            <if test="toDate !=null and toDate !=''">
                 and to_date = #{toDate}
             </if>
         </where>
@@ -59,17 +59,12 @@
             to_date = #{toDate}
         </set>
         <where>
-            <if test="empNo !=null">
-                emp_no = #{empNo}
-            </if>
-            <if test="deptNo !=null and deptNo !=''" >
-                AND dept_no = #{deptNo}
-            </if>
+            emp_no = #{empNo}
         </where>
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.DeptManager">
-        INSERT INTO `dept_manager` VALUES (#{empNo},#{deptNo},#{formDate},#{toDate});
+        INSERT INTO `dept_manager` VALUES (#{empNo},#{deptNo},#{fromDate},#{toDate});
     </insert>
 
     <delete id="deleteByEmpNo" parameterType="long">
@@ -77,7 +72,7 @@
         FROM
             dept_manager
         <where>
-            dept_no = #{empNo}
+            emp_no = #{empNo}
         </where>
     </delete>
 </mapper>

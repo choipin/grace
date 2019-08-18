@@ -23,6 +23,6 @@ import java.util.Date;
 public class Salary {
     private Long empNo;
     private Long salary;
-    private Date fromDate;
-    private Date toDate;
+    private String fromDate;
+    private String toDate;
 }

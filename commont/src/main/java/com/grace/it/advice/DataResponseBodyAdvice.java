@@ -32,7 +32,7 @@ public class DataResponseBodyAdvice implements ResponseBodyAdvice {
         ResponseTemplete<Object> responseTemplete = new ResponseTemplete<>();
        responseTemplete.setData(body);
 
-       if (body instanceof String || body instanceof Integer || body instanceof Boolean){
+       if (body instanceof String ){
            return JSON.toJSONString(responseTemplete);
        }
         return responseTemplete;
