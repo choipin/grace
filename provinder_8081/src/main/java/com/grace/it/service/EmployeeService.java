@@ -2,6 +2,7 @@ package com.grace.it.service;
 
 import com.grace.it.entity.Dept;
 import com.grace.it.entity.Employee;
+import com.grace.it.model.PageResult;
 import com.grace.it.model.PageVo;
 
 import java.util.List;
@@ -16,9 +17,11 @@ import java.util.List;
 public interface EmployeeService {
     public List<Employee> listByCondition(Employee employee);
 
-    public List<Employee> selectTitleByPage(PageVo pageVo);
+    public PageResult<Employee> selectByPage(PageVo pageVo);
 
     public Integer updateByCondition(Employee employee);
 
     public Long insert(Employee employee);
+
+    public Integer deleteByEmpNo(Long empNo);
 }

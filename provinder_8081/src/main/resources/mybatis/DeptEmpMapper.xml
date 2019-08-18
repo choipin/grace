@@ -40,7 +40,7 @@
             to_date
         FROM
             dept_emp
-            LIMIT  #{curretPage} ,#{pageSize}
+            LIMIT  #{currentPage} ,#{pageSize}
     </select>
 
     <select id="countRows" resultType="integer" >

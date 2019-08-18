@@ -1,5 +1,6 @@
 package com.grace.it.controller;
 
+import com.grace.it.annotation.LoggerParam;
 import com.grace.it.entity.Department;
 import com.grace.it.entity.Dept;
 import com.grace.it.model.PageResult;
@@ -18,27 +19,29 @@ import java.util.List;
  * @version: 1.0
  */
 @RestController
+@LoggerParam
+@RequestMapping("/department")
 public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
 
-    @GetMapping("/department/list/")
-    public List<Department> listByCondition(@RequestBody Department department){
+    @GetMapping("/list")
+    public List<Department> listByCondition( Department department){
         return departmentService.listByCondition(department);
     }
 
-    @GetMapping("/department/page/")
-    public PageResult<Department> selectByPage(@RequestBody PageVo pageVo){
+    @GetMapping("/page")
+    public PageResult<Department> selectByPage( PageVo pageVo){
         return departmentService.selectTitleByPage(pageVo);
     }
 
-    @PostMapping("/department/update")
+    @PostMapping("/update")
     public long updateByCondition(@RequestBody Department department){
         return departmentService.updateByCondition(department);
     }
 
-    @PostMapping("/department/delete")
+    @DeleteMapping("/delete")
     public Integer deleteByCondition(@RequestBody Department department){
         return departmentService.delete(department);
     }

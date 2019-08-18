@@ -46,9 +46,6 @@
             <if test="deptNo !=null and deptNo !=''">
                 dept_no = #{deptNo}
             </if>
-            <if test="deptName !=null and deptName !=''">
-               and dept_name = #{deptName}
-            </if>
         </where>
 
     </update>

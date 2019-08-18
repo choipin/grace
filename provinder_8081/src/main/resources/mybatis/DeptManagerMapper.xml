@@ -9,18 +9,75 @@
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">
-        select emp_no,dept_no,from_date,to_date from dept_manager where emp_no = #{empNo}
+        SELECT
+            emp_no,
+            dept_no,
+            from_date,
+            to_date
+        FROM
+            dept_manager
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="deptNo !=null and deptNo !=''">
+                and dept_no = #{deptNo}
+            </if>
+            <if test="fromDate !=null">
+                and from_date = #{fromDate}
+            </if>
+            <if test="toDate !=null">
+                and to_date = #{toDate}
+            </if>
+        </where>
     </select>
 
-    <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
-        select emp_no,dept_no,from_date,to_date from dept_manager limit #{curretPage} ,#{pageSize}
+    <select id="selectByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
+        SELECT
+            emp_no,
+            dept_no,
+            from_date,
+            to_date
+        FROM
+            dept_manager
+            LIMIT #{currentPage},#{pageSize}
+    </select>
+
+    <select id="countDeptManager" resultType="integer">
+        SELECT
+            count( dept_no )
+        FROM
+            dept_manager;
     </select>
 
     <update id="updateByCondition" parameterType="com.grace.it.entity.DeptManager">
-
+        UPDATE dept_manager
+        <set>
+            emp_no = #{empNo},
+            dept_no = #{deptNo},
+            from_date = #{fromDate},
+            to_date = #{toDate}
+        </set>
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="deptNo !=null and deptNo !=''" >
+                AND dept_no = #{deptNo}
+            </if>
+        </where>
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.DeptManager">
         INSERT INTO `dept_manager` VALUES (#{empNo},#{deptNo},#{formDate},#{toDate});
     </insert>
+
+    <delete id="deleteByEmpNo" parameterType="long">
+        DELETE
+        FROM
+            dept_manager
+        <where>
+            dept_no = #{empNo}
+        </where>
+    </delete>
 </mapper>
