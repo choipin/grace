@@ -46,7 +46,7 @@ public class EmployeeController {
         return employeeService.insert(employee);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{empNo}")
     public Integer deleteByEmpNo(@PathVariable("empNo")Long empNo){
         return employeeService.deleteByEmpNo(empNo);
     }

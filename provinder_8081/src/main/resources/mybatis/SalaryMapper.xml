@@ -65,7 +65,34 @@
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.Salary">
-        INSERT INTO salary VALUES (#{empNo}, #{salary}, #{fromDate}, #{toDate});
+        INSERT INTO salary(
+        <if test="empNo != null and empNo !=''">
+            emp_no
+        </if>
+        <if test="salary != null and salary !=''">
+            , salary
+        </if>
+        <if test="fromDate != null and fromDate !=''">
+            , from_date
+        </if>
+        <if test="toDate != null and toDate !=''">
+            , to_date
+        </if>
+        )
+        VALUES (
+        <if test="empNo != null and empNo !=''">
+             #{empNo,jdbcType=BIGINT}
+        </if>
+        <if test="salary != null and salary !=''">
+            , #{salary,jdbcType=BIGINT}
+        </if>
+        <if test="fromDate != null and fromDate !=''">
+            , #{fromDate,jdbcType=VARCHAR}
+        </if>
+        <if test="toDate != null and toDate !=''">
+            , #{toDate,jdbcType=VARCHAR}
+        </if>
+        );
     </insert>
 
     <delete id="deleteByEmpNo" parameterType="long">
