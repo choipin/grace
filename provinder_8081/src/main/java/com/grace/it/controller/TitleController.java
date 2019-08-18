@@ -25,7 +25,7 @@ public class TitleController {
     @Autowired
     private TitleService titleService;
 
-    @GetMapping("/title")
+    @GetMapping("/list")
     public List<Title> selectTitleByCondition(Title title){
         return titleService.listByCondition(title);
     }

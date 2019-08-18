@@ -30,7 +30,6 @@
                 and to_date = #{toDate}
             </if>
         </where>
-        WHERE
     </select>
 
     <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
