@@ -3,11 +3,11 @@
 <mapper namespace="com.grace.it.dao.EmployeeDao">
     <resultMap id="collectResultMap" type="com.grace.it.entity.Employee">
         <result column="emp_no" jdbcType="BIGINT" property="empNo"/>
-        <result column="birth_date" jdbcType="VARCHAR" property="birthDate"/>
+        <result column="birth_date" jdbcType="TIMESTAMP" property="birthDate"/>
         <result column="first_name" jdbcType="VARCHAR" property="firstName"/>
         <result column="last_name" jdbcType="VARCHAR" property="lastName"/>
         <result column="gender" jdbcType="VARCHAR" property="gender"/>
-        <result column="hire_date" jdbcType="VARCHAR" property="hireDate"/>
+        <result column="hire_date" jdbcType="TIMESTAMP" property="hireDate"/>
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">
@@ -25,19 +25,19 @@
                 emp_no = #{empNo}
             </if>
             <if test="birthDate !=null and birthDate !=''">
-                and birth_date = #{birthDate}
+                birth_date = #{birthDate}
             </if>
             <if test="firstName !=null and firstName !=''">
-                and first_name = #{firstName}
+                first_name = #{firstName}
             </if>
             <if test="lastName !=null and lastName !=''">
-                and last_name = #{lastName}
+                last_name = #{lastName}
             </if>
             <if test="gender !=null and gender !=''">
-                and gender = #{gender}
+                gender = #{gender}
             </if>
             <if test="hireDate !=null and hireDate !=''">
-                and hire_date = #{hireDate}
+                hire_date = #{hireDate}
             </if>
         </where>
     </select>
@@ -65,76 +65,36 @@
     <update id="updateByCondition" parameterType="com.grace.it.entity.Employee">
         UPDATE employee
         <set>
-            <if test="birthDate !=null and birthDate !=''">
-                birth_date = #{birthDate},
-            </if>
-            <if test="firstName !=null and firstName !=''">
-                first_name = #{firstName},
-            </if>
-            <if test="lastName !=null and lastName !=''">
-                last_name = #{lastName},
-            </if>
-            <if test="gender !=null and gender !=''">
-                gender = #{gender},
-            </if>
-            <if test="hireDate !=null and hireDate !=''">
-                hire_date = #{hireDate}
-            </if>
+            emp_no = #{empNo},
+            birth_date =#{birthDate},
+            first_name =#{firstName},
+            last_name =#{lastName},
+            gender = #{gender},
+            hire_date = #{hireDate}
         </set>
         <where>
-            emp_no = #{empNo}
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="birthDate !=null">
+                and birth_date = #{birthDate}
+            </if>
+            <if test="firstName !=null">
+                and first_name = #{firstName}
+            </if>
+            <if test="lastName !=null">
+                and last_name = #{lastName}
+            </if>
+            <if test="gender !=null">
+                and gender = #{gender}
+            </if>
+            <if test="hireDate !=null">
+                and hire_date = #{hireDate}
+            </if>
         </where>
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.Employee">
-        INSERT INTO employee(
-            <if test="empNo !=null and empNo !=''">
-                emp_no
-            </if>
-            <if test="birthDate !=null and birthDate !=''">
-                ,birth_date
-            </if>
-            <if test="firstName !=null and firstName !=''">
-                ,first_name
-            </if>
-            <if test="lastName !=null and lastName !=''">
-                ,last_name
-            </if>
-            <if test="gender !=null and gender !=''">
-                , gender
-            </if>
-            <if test="hireDate !=null and hireDate !=''">
-                ,hire_date
-            </if>
-        )
-         VALUES (
-        <if test="empNo !=null and empNo !=''">
-             #{empNo}
-        </if>
-        <if test="birthDate !=null and birthDate !=''">
-            ,#{birthDate}
-        </if>
-        <if test="firstName !=null and firstName !=''">
-            ,#{firstName}
-        </if>
-        <if test="lastName !=null and lastName !=''">
-            ,#{lastName}
-        </if>
-        <if test="gender !=null and gender !=''">
-           , #{gender}
-        </if>
-        <if test="hireDate !=null and hireDate !=''">
-            , #{hireDate}
-        </if>
-        );
+        INSERT INTO employee VALUES (#{empNo}, #{birthDate}, #{firstName}, #{lastName}, #{gender}, #{hireDate});
     </insert>
-
-    <delete id="deleteByEmpNo" parameterType="long">
-        DELETE
-        FROM
-            employee
-        <where>
-            emp_no = #{empNo}
-        </where>
-    </delete>
 </mapper>

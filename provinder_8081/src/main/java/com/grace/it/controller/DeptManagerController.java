@@ -35,13 +35,8 @@ public class DeptManagerController {
         return deptManagerService.selectByPage(pageVo);
     }
 
-    @PostMapping("/update")
-    public Integer updateByCondition(@RequestBody DeptManager deptManager){
-        return deptManagerService.updateByCondition(deptManager);
-    }
-
     @PostMapping("/add")
-    public Integer insertDeptManager(@RequestBody DeptManager deptManager){
+    public Long insertDeptManager(@RequestBody DeptManager deptManager){
         return deptManagerService.insert(deptManager);
     }
 

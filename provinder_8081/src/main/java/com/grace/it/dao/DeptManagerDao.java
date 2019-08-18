@@ -17,15 +17,13 @@ import java.util.List;
 @Mapper
 @Component
 public interface DeptManagerDao {
-    public List<DeptManager> listByCondition(DeptManager deptManager);
+    public List<DeptManagerDao> listByCondition(DeptManagerDao deptManager);
 
-    public List<DeptManager> selectByPage(PageVo pageVo);
+    public List<DeptManagerDao> selectTitleByPage(PageVo pageVo);
 
-    public Integer countDeptManager();
+    public Integer updateByCondition(DeptManagerDao deptManager);
 
-    public Integer updateByCondition(DeptManager deptManager);
-
-    public Integer insert(DeptManager deptManager);
+    public Long insert(DeptManager deptManager);
 
     public Integer deleteByEmpNo(Long empNo);
 }

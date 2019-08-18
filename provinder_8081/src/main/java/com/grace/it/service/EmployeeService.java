@@ -17,11 +17,11 @@ import java.util.List;
 public interface EmployeeService {
     public List<Employee> listByCondition(Employee employee);
 
-    public PageResult<Employee> selectByPage(PageVo pageVo);
+    public List<Employee> selectTitleByPage(PageVo pageVo);
 
     public Integer updateByCondition(Employee employee);
 
-    public Integer insert(Employee employee);
+    public Long insert(Employee employee);
 
     public Integer deleteByEmpNo(Long empNo);
 }

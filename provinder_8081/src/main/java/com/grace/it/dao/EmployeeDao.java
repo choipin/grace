@@ -20,13 +20,11 @@ import java.util.List;
 public interface EmployeeDao {
     public List<Employee> listByCondition(Employee employee);
 
-    public List<Employee> selectByPage(PageVo pageVo);
-
-    public Integer countEmployee();
+    public List<Employee> selectTitleByPage(PageVo pageVo);
 
     public Integer updateByCondition(Employee employee);
 
-    public Integer insert(Employee employee);
+    public Long insert(Employee employee);
 
     public Integer deleteByEmpNo(Long empNo);
 }

@@ -43,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Transactional
     @Override
-    public Integer insert(Employee employee) {
+    public Long insert(Employee employee) {
         return employeeDao.insert(employee);
     }
 

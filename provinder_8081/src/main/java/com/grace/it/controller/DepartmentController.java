@@ -19,34 +19,28 @@ import java.util.List;
  * @version: 1.0
  */
 @RestController
-@LoggerParam
-@RequestMapping("/department")
 public class DepartmentController {
 
     @Autowired
     private DepartmentService departmentService;
 
-    @GetMapping("/list")
-    public List<Department> listByCondition( Department department){
+    @GetMapping("/department/list/")
+    public List<Department> listByCondition(@RequestBody Department department){
         return departmentService.listByCondition(department);
     }
 
-    @GetMapping("/page")
-    public PageResult<Department> selectByPage( PageVo pageVo){
+    @GetMapping("/department/page/")
+    public PageResult<Department> selectByPage(@RequestBody PageVo pageVo){
         return departmentService.selectTitleByPage(pageVo);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/department/update")
     public long updateByCondition(@RequestBody Department department){
         return departmentService.updateByCondition(department);
     }
 
-    @PostMapping("/add")
-    public Integer addDepartment(@RequestBody Department department){
-        return departmentService.insert(department);
-    }
-    @DeleteMapping("/delete/{deptNo}")
-    public Integer deleteByCondition(@PathVariable("deptNo")String deptNo){
-        return departmentService.delete(deptNo);
+    @DeleteMapping("/delete")
+    public Integer deleteByCondition(@RequestBody Department department){
+        return departmentService.delete(department);
     }
 }

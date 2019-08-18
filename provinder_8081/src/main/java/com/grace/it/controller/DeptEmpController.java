@@ -5,6 +5,7 @@ import com.grace.it.entity.DeptEmp;
 import com.grace.it.model.PageResult;
 import com.grace.it.model.PageVo;
 import com.grace.it.service.DeptEmpService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,28 +20,24 @@ import java.util.List;
  */
 @RestController
 @LoggerParam
-@RequestMapping("/deptEmp")
 public class DeptEmpController {
 
     @Autowired
     private DeptEmpService deptEmpService;
 
-    @GetMapping("/list")
-    public List<DeptEmp> listByCondition( DeptEmp deptEmp){
+    @GetMapping("/deptEmp/list")
+    public List<DeptEmp> listByCondition(@RequestBody DeptEmp deptEmp){
         return deptEmpService.listByCondition(deptEmp);
     }
 
-    @GetMapping("/page")
-    public PageResult<DeptEmp> pageDeptEmp( PageVo pageVo){
+    @GetMapping("/deptEmp/page")
+    public PageResult<DeptEmp> pageDeptEmp(@RequestBody PageVo pageVo){
         return deptEmpService.selectTitleByPage(pageVo);
     }
 
-    @PostMapping("/update")
-    public Integer updateByCondition(@RequestBody DeptEmp deptEmp){
-        return deptEmpService.updateByCondition(deptEmp);
-    }
     @PostMapping("/add")
-    public Integer addDeptEmp(@RequestBody DeptEmp deptEmp){
+    public Integer updateByCondition(@RequestBody DeptEmp deptEmp){
+        final Integer insert = deptEmpService.insert(deptEmp);
         return deptEmpService.insert(deptEmp);
     }
 

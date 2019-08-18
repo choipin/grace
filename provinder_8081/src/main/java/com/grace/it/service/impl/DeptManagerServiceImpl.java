@@ -43,7 +43,7 @@ public class DeptManagerServiceImpl implements DeptManagerService {
 
     @Transactional
     @Override
-    public Integer insert(DeptManager deptManager) {
+    public Long insert(DeptManager deptManager) {
         return deptManagerDao.insert(deptManager);
     }
 
