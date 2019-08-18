@@ -21,7 +21,11 @@ public interface TitleDao {
 
     public List<Title> selectTitleByPage(PageVo pageVo);
 
+    public Integer countTitle();
+
     public Integer updateByCondition(Title title);
 
-    public Long insert(Title title);
+    public Integer insert(Title title);
+
+    public Integer deleteByEmpNo(Long empNo);
 }

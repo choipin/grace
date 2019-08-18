@@ -9,19 +9,70 @@
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">
-        select emp_no,title,from_date,to_date from titles where emp_no = #{empNo}
+       SELECT
+            emp_no,
+            title,
+            from_date,
+            to_date
+        FROM
+            title
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="title !=null">
+                title = #{title}
+            </if>
+            <if test="fromDate !=null">
+                from_date = #{fromDate}
+            </if>
+            <if test="toDate !=null">
+                to_date = #{toDate}
+            </if>
+        </where>
+        WHERE
     </select>
 
     <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
-        select emp_no,title,from_date,to_date from titles limit #{curretPage} ,#{pageSize}
+        select emp_no,title,from_date,to_date from title limit #{currentPage} ,#{pageSize}
+    </select>
+
+    <select id="countTitle" resultType="integer">
+        select count(emp_no) from title ;
     </select>
 
     <update id="updateByCondition" parameterType="com.grace.it.entity.Title">
-
+        update title
+        <set>
+            emp_no = #{empNo},
+            title = #{title},
+            from_date = #{fromDate},
+            to_date = #{toDate}
+        </set>
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="title !=null">
+                and title = #{title}
+            </if>
+            <if test="fromDate !=null">
+                and from_date = #{fromDate}
+            </if>
+            <if test="toDate !=null">
+                and to_date = #{toDate}
+            </if>
+        </where>
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.Title">
-        INSERT INTO `titles` VALUES (#{empNo}, #{title}, #{fromDate}, #{toDate});
+        INSERT INTO title VALUES (#{empNo}, #{title}, #{fromDate}, #{toDate});
     </insert>
 
+    <delete id="deleteByEmpNo" parameterType="long">
+        delete from title
+        <where>
+            emp_no = #{empNo}
+        </where>
+    </delete>
 </mapper>

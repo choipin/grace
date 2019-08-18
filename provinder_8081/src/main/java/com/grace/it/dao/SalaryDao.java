@@ -20,9 +20,13 @@ import java.util.List;
 public interface SalaryDao {
     public List<Salary> listByCondition(Salary salary);
 
-    public List<Salary> selectTitleByPage(PageVo pageVo);
+    public List<Salary> selectByPage(PageVo pageVo);
+
+    public Integer countSalary();
 
     public Integer updateByCondition(Salary salary);
 
-    public Long insert(Salary salary);
+    public Integer insert(Salary salary);
+
+    public Integer deleteByEmpNo(Long empNo);
 }

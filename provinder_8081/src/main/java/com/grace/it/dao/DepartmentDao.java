@@ -24,9 +24,9 @@ public interface DepartmentDao {
 
     public Integer updateByCondition(Department department);
 
-    public Long insert(Department department);
+    public Integer insert(Department department);
 
-    public Integer deteleByCondition(Department department);
+    public Integer deteleByCondition(String deptNo);
 
     public Integer count();
 }

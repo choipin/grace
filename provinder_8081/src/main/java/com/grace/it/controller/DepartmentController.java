@@ -41,8 +41,12 @@ public class DepartmentController {
         return departmentService.updateByCondition(department);
     }
 
-    @DeleteMapping("/delete")
-    public Integer deleteByCondition(@RequestBody Department department){
-        return departmentService.delete(department);
+    @PostMapping("/add")
+    public Integer addDepartment(@RequestBody Department department){
+        return departmentService.insert(department);
+    }
+    @DeleteMapping("/delete/{deptNo}")
+    public Integer deleteByCondition(@PathVariable("deptNo")String deptNo){
+        return departmentService.delete(deptNo);
     }
 }
