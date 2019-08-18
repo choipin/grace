@@ -1,0 +1,23 @@
+server:
+  port: 8081
+management:
+  security:
+    enabled: false
+security:
+  basic:
+    enabled: false
+spring:
+  application:
+    name: grace-provinder-8081
+  profiles:
+    active: dev
+  datasource:
+    username: root
+    password: root
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/dev01
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  type-aliases-package: com.grace.it.entity

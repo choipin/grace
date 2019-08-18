@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grace.it.dao.DeptEmpDao">
+    <resultMap id="collectResultMap" type="com.grace.it.entity.DeptEmp">
+        <result column="emp_no" jdbcType="BIGINT" property="empNo"/>
+        <result column="dept_no" jdbcType="VARCHAR" property="deptNo"/>
+        <result column="from_date" jdbcType="TIMESTAMP" property="fromDate"/>
+        <result column="to_date" jdbcType="TIMESTAMP" property="toDate"/>
+    </resultMap>
+
+    <select id="listByCondition" resultMap="collectResultMap">
+        SELECT
+            emp_no,
+            dept_no,
+            from_date,
+            to_date
+        FROM
+            dept_emp
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="deptNo !=null and deptNo !=''">
+               and dept_no = #{deptNo}
+            </if>
+            <if test="fromDate !=null">
+               and from_date = #{empNo}
+            </if>
+            <if test="toDate !=null">
+               and to_date = #{empNo}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
+        SELECT
+            emp_no,
+            dept_no,
+            from_date,
+            to_date
+        FROM
+            dept_emp
+            LIMIT  #{curretPage} ,#{pageSize}
+    </select>
+
+    <select id="countRows" resultType="integer" >
+        SELECT
+            count( emp_no )
+        FROM
+            dept_emp;
+    </select>
+    <update id="updateByCondition" parameterType="com.grace.it.entity.DeptEmp">
+        UPDATE dept_emp
+        <set>
+            <if test="empNo !=null">
+                emp_no = #{empNo},
+            </if>
+            <if test="deptNo !=null">
+                dept_no = #{deptNo},
+            </if>
+            <if test="fromDate !=null">
+                from_date = #{fromDate},
+            </if>
+            <if test="toDate !=null">
+                to_date = #{toDate}
+            </if>
+        </set>
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="deptNo !=null">
+               and dept_no = #{deptNo}
+            </if>
+            <if test="fromDate !=null">
+               and from_date = #{fromDate}
+            </if>
+            <if test="toDate !=null">
+               and to_date = #{toDate}
+            </if>
+        </where>
+    </update>
+
+    <insert id="insert" parameterType="com.grace.it.entity.DeptEmp">
+        INSERT INTO `dept_emp` VALUES (#{empNo},#{deptNo},#{fromDate},#{toDate});
+    </insert>
+
+    <delete id="deleteByCondition" parameterType="com.grace.it.entity.DeptEmp">
+        delete from dept_emp
+        <where>
+            emp_no = #{empNo}
+        </where>
+    </delete>
+</mapper>

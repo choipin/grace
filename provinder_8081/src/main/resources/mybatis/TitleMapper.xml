@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grace.it.dao.TitleDao">
+    <resultMap id="collectResultMap" type="com.grace.it.entity.Title">
+        <result column="emp_no" jdbcType="BIGINT" property="empNo"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="from_date" jdbcType="TIMESTAMP" property="fromDate"/>
+        <result column="to_date" jdbcType="TIMESTAMP" property="toDate"/>
+    </resultMap>
+
+    <select id="listByCondition" resultMap="collectResultMap">
+        select emp_no,title,from_date,to_date from titles where emp_no = #{empNo}
+    </select>
+
+    <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
+        select emp_no,title,from_date,to_date from titles limit #{curretPage} ,#{pageSize}
+    </select>
+
+    <update id="updateByCondition" parameterType="com.grace.it.entity.Title">
+
+    </update>
+
+    <insert id="insert" parameterType="com.grace.it.entity.Title">
+        INSERT INTO `titles` VALUES (#{empNo}, #{title}, #{fromDate}, #{toDate});
+    </insert>
+
+</mapper>

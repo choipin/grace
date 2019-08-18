@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grace.it.dao.DeptDao">
+    <resultMap id="collectResultMap" type="com.grace.it.entity.Dept">
+        <result column="dept_no" jdbcType="BIGINT" property="deptno"/>
+        <result column="dName" jdbcType="VARCHAR" property="dName"/>
+        <result column="dbSource" jdbcType="TIMESTAMP" property="dbSource"/>
+        <result column="description" jdbcType="TIMESTAMP" property="description"/>
+    </resultMap>
+
+    <select id="listByCondition" resultMap="collectResultMap">
+        select deptno,dName,dbSource,description from dept where emp_no = #{deptNo}
+    </select>
+
+    <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
+        select deptno,dName,dbSource,description  from dept limit #{curretPage} ,#{pageSize}
+    </select>
+
+    <update id="updateByCondition" parameterType="com.grace.it.entity.Dept">
+
+    </update>
+
+    <insert id="insert" parameterType="com.grace.it.entity.Dept">
+        INSERT INTO `dept` VALUES (#{deptNo}, #{dName}, #{dbSource}, #{description});
+    </insert>
+</mapper>

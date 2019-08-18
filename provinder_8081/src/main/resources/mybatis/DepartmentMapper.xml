@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grace.it.dao.DepartmentDao">
+    <resultMap id="collectResultMap" type="com.grace.it.entity.Department">
+        <result column="dept_no" jdbcType="VARCHAR" property="deptNo"/>
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName"/>
+    </resultMap>
+
+    <select id="listByCondition" resultMap="collectResultMap">
+        SELECT
+            dept_no,
+            dept_name
+        FROM
+            department
+        <where>
+            <if test="deptNo !=null and deptNo !=''">
+                dept_no = #{deptNo}
+            </if>
+            <if test="deptName !=null and deptName !=''">
+                and dept_name = #{deptName}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
+        SELECT
+            dept_no,
+            dept_name
+        FROM
+            department
+            LIMIT #{currentPage} ,#{pageSize}
+    </select>
+
+    <update id="updateByCondition" parameterType="com.grace.it.entity.Department">
+        UPDATE department
+        <set>
+            <if test="deptNo !=null and deptNo !=''">
+                dept_no = #{deptNo},
+            </if>
+            <if test="deptName !=null and deptName !=''">
+                dept_name = #{deptName}
+            </if>
+        </set>
+        <where>
+            <if test="deptNo !=null and deptNo !=''">
+                dept_no = #{deptNo}
+            </if>
+            <if test="deptName !=null and deptName !=''">
+               and dept_name = #{deptName}
+            </if>
+        </where>
+
+    </update>
+
+    <insert id="insert" parameterType="com.grace.it.entity.Department">
+        INSERT INTO `department` VALUES (#{deptNo}, #{deptName});
+    </insert>
+
+    <delete id="deteleByCondition" parameterType="com.grace.it.entity.Department">
+        DELETE
+        FROM
+            department
+        <where>
+             dept_no = #{deptNo}
+        </where>
+    </delete>
+
+    <select id="count" resultType="integer">
+        SELECT
+            count( dept_no )
+        FROM
+            department;
+    </select>
+</mapper>
