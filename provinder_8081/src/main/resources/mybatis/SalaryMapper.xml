@@ -4,35 +4,69 @@
     <resultMap id="collectResultMap" type="com.grace.it.entity.Salary">
         <result column="emp_no" jdbcType="BIGINT" property="empNo"/>
         <result column="salary" jdbcType="VARCHAR" property="salary"/>
-        <result column="from_date" jdbcType="TIMESTAMP" property="fromDate"/>
-        <result column="to_date" jdbcType="TIMESTAMP" property="toDate"/>
+        <result column="from_date" jdbcType="VARCHAR" property="fromDate"/>
+        <result column="to_date" jdbcType="VARCHAR" property="toDate"/>
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">
-        select emp_no,salary,from_date,to_date from salaries where emp_no = #{empNo}
+        SELECT
+            emp_no,
+            salary,
+            from_date,
+            to_date
+        FROM
+            salary
+        <where>
+            <if test="empNo != null">
+                emp_no = #{empNo}
+            </if>
+            <if test="salary != null">
+                and salary = #{salary}
+            </if>
+            <if test="fromDate != null and fromDate !=''">
+                and from_date = #{fromDate}
+            </if>
+            <if test="toDate != null and toDate !=''">
+                and to_date = #{toDate}
+            </if>
+        </where>
     </select>
 
-    <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
-        select emp_no,salary,from_date,to_date from salaries limit #{curretPage} ,#{pageSize}
+    <select id="selectByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
+        select emp_no,salary,from_date,to_date from salary limit #{currentPage} ,#{pageSize}
+    </select>
+
+    <select id="countSalary" resultType="integer">
+        select count(emp_no) from salary;
     </select>
 
     <update id="updateByCondition" parameterType="com.grace.it.entity.Salary">
-        update salaries set(emp_no,salary,from_date,to_date) values (
-        <if test="salary !=null">
-            salary = #{salary}
-        </if>
-        <if test="fromDate !=null">
-            from_date = #{fromDate}
-        </if>
-        <if test="toDate !=null">
-            to_date = #{toDate}
-        </if>
-        )
-        where emp_no = #{empNo}
+        update salary
+        <set>
+            <if test="salary !=null">
+                salary = #{salary},
+            </if>
+            <if test="fromDate !=null and fromDate !=''">
+                from_date = #{fromDate},
+            </if>
+            <if test="toDate !=null and toDate !=''">
+                to_date = #{toDate}
+            </if>
+        </set>
+         <where>
+             emp_no = #{empNo}
+         </where>
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.Salary">
         INSERT INTO salary VALUES (#{empNo}, #{salary}, #{fromDate}, #{toDate});
     </insert>
+
+    <delete id="deleteByEmpNo" parameterType="long">
+        delete from salary
+        <where>
+            emp_no = #{empNo}
+        </where>
+    </delete>
 
 </mapper>

@@ -23,6 +23,6 @@ import java.util.Date;
 public class Title {
     private Long empNo;
     private String title;
-    private Date fromDate;
-    private Date toDate;
+    private String fromDate;
+    private String toDate;
 }

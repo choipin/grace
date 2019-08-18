@@ -24,6 +24,6 @@ import java.util.Date;
 public class DeptManager implements Serializable {
     private Long empNo;
     private String deptNo;
-    private Date formDate;
-    private Date toDate;
+    private String fromDate;
+    private String toDate;
 }

@@ -43,9 +43,7 @@
             </if>
         </set>
         <where>
-            <if test="deptNo !=null and deptNo !=''">
-                dept_no = #{deptNo}
-            </if>
+            dept_no = #{deptNo}
         </where>
 
     </update>

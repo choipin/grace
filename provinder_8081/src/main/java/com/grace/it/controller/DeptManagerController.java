@@ -27,6 +27,7 @@ public class DeptManagerController {
 
     @GetMapping("/list")
     public List<DeptManager> selectByCondition(DeptManager deptManager){
+
         return deptManagerService.listByCondition(deptManager);
     }
 

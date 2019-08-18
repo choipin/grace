@@ -21,3 +21,5 @@ spring:
 mybatis:
   mapper-locations: classpath:mybatis/*.xml
   type-aliases-package: com.grace.it.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

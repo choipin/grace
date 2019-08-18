@@ -22,9 +22,9 @@ import java.util.Date;
 @Accessors(chain = true)
 public class Employee {
     private Long empNo;
-    private Date birthDate;
+    private String birthDate;
     private String firstName;
     private String lastName;
-    private Character gender;
-    private Date hireDate;
+    private String gender;
+    private String hireDate;
 }
