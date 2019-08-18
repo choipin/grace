@@ -43,7 +43,7 @@ public class TitleController {
         return titleService.add(title);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{empNo}")
     public Integer deleteByEmpNo(@PathVariable("empNo")Long empNo){
         return titleService.deleteByEmpNo(empNo);
     }
