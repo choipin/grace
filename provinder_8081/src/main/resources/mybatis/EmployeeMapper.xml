@@ -11,18 +11,99 @@
     </resultMap>
 
     <select id="listByCondition" resultMap="collectResultMap">
-        select emp_no,birth_date,first_name,last_name,gender,hire_date from employees where emp_no = #{empNo}
+        SELECT
+            emp_no,
+            birth_date,
+            first_name,
+            last_name,
+            gender,
+            hire_date
+        FROM
+            employee
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="birthDate !=null and birthDate !=''">
+                birth_date = #{birthDate}
+            </if>
+            <if test="firstName !=null and firstName !=''">
+                first_name = #{firstName}
+            </if>
+            <if test="lastName !=null and lastName !=''">
+                last_name = #{lastName}
+            </if>
+            <if test="gender !=null and gender !=''">
+                gender = #{gender}
+            </if>
+            <if test="hireDate !=null and hireDate !=''">
+                hire_date = #{hireDate}
+            </if>
+        </where>
     </select>
 
-    <select id="selectTitleByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
-        select emp_no,birth_date,first_name,last_name,gender,hire_date from employees limit #{curretPage} ,#{pageSize}
+    <select id="selectByPage" resultMap="collectResultMap" parameterType="com.grace.it.model.PageVo">
+        SELECT
+            emp_no,
+            birth_date,
+            first_name,
+            last_name,
+            gender,
+            hire_date
+        FROM
+            employee
+            LIMIT #{currentPage} ,#{pageSize}
+    </select>
+
+    <select id="countEmployee" resultType="integer">
+        SELECT
+            count( emp_no )
+        FROM
+            employee;
     </select>
 
     <update id="updateByCondition" parameterType="com.grace.it.entity.Employee">
-
+        UPDATE employee
+        <set>
+            emp_no = #{empNo},
+            birth_date =#{birthDate},
+            first_name =#{firstName},
+            last_name =#{lastName},
+            gender = #{gender},
+            hire_date = #{hireDate}
+        </set>
+        <where>
+            <if test="empNo !=null">
+                emp_no = #{empNo}
+            </if>
+            <if test="birthDate !=null">
+                and birth_date = #{birthDate}
+            </if>
+            <if test="firstName !=null">
+                and first_name = #{firstName}
+            </if>
+            <if test="lastName !=null">
+                and last_name = #{lastName}
+            </if>
+            <if test="gender !=null">
+                and gender = #{gender}
+            </if>
+            <if test="hireDate !=null">
+                and hire_date = #{hireDate}
+            </if>
+        </where>
     </update>
 
     <insert id="insert" parameterType="com.grace.it.entity.Employee">
-        INSERT INTO `employees` VALUES (#{empNo}, #{birthDate}, #{firstName}, #{lastName}, #{gender}, #{hireDate});
+        INSERT INTO employee VALUES (#{empNo}, #{birthDate}, #{firstName}, #{lastName}, #{gender}, #{hireDate});
     </insert>
+
+    <delete id="deleteByEmpNo" parameterType="long">
+        DELETE
+        FROM
+            employee
+        <where>
+            emp_no = #{empNo}
+        </where>
+    </delete>
 </mapper>

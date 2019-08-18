@@ -1,5 +1,6 @@
 package com.grace.it.dao;
 
+import com.grace.it.entity.DeptManager;
 import com.grace.it.model.PageVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -16,11 +17,15 @@ import java.util.List;
 @Mapper
 @Component
 public interface DeptManagerDao {
-    public List<DeptManagerDao> listByCondition(DeptManagerDao deptManager);
+    public List<DeptManager> listByCondition(DeptManager deptManager);
 
-    public List<DeptManagerDao> selectTitleByPage(PageVo pageVo);
+    public List<DeptManager> selectByPage(PageVo pageVo);
 
-    public Integer updateByCondition(DeptManagerDao deptManager);
+    public Integer countDeptManager();
 
-    public Long insert(DeptManagerDao deptManager);
+    public Integer updateByCondition(DeptManager deptManager);
+
+    public Long insert(DeptManager deptManager);
+
+    public Integer deleteByEmpNo(Long empNo);
 }
