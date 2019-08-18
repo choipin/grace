@@ -18,6 +18,8 @@ import java.util.List;
  * @version: 1.0
  */
 @RestController
+@LoggerParam
+@RequestMapping("/title")
 public class TitleController {
 
     @Autowired
